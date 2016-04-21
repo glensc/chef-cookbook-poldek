@@ -31,7 +31,7 @@ module Poldek
     #
     # @return []
     def filter_enabled(hash)
-      hash.reject do |k,v|
+      hash.dup.reject do |k,v|
         !v
       end
     end

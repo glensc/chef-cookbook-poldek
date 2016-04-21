@@ -17,7 +17,22 @@
 # limitations under the License.
 #
 
+# Cache directory for downloaded files.
 default['poldek']['cachedir'] = '/var/cache/poldek'
 
-# enable, if you wish poldek recipe to manage poldek config
+# Prevent package listed from being upgraded if they are already installed.
+# hold = kernel* foo*.i686 th-test:* *-smp-* th-ready:bar*.x86_64
+# Only the key is used, value can be used for descriptive purposes
+default['poldek']['hold'] = {
+  'kernel*' => 'Always hold kernel packages',
+}
+
+# Ignore package list - packages fits given mask will be invisible.
+# ignore = *-smp-* foo*
+# Only the key is used, value can be used for descriptive purposes
+default['poldek']['ignore'] = {
+  'vserver-packages' => 'Ignore vserver-packages by default',
+}
+
+# enable, if you wish poldek recipe to manage poldek config.
 default['poldek']['manage'] = false

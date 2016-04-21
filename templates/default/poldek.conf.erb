@@ -136,11 +136,15 @@ pm command = /usr/lib/poldek/pm-command.sh
 
 # Prevent package listed from being upgraded if they are already installed.
 # hold = kernel* foo*.i686 th-test:* *-smp-* th-ready:bar*.x86_64
-hold = kernel*
+<% if node['poldek']['hold'] -%>
+hold = <%= node['poldek']['hold'].keys.join(' ') %>
+<% end %>
 
 # Ignore package list - packages fits given mask will be invisible.
 # ignore = *-smp-* foo*
-ignore = vserver-packages
+<% if node['poldek']['ignore'] -%>
+ignore = <%= node['poldek']['ignore'].keys.join(' ') %>
+<% end %>
 
 # Conflicts with already installed packages are treated as resolved
 # if at least one of multiple-installed package satisfies conflict.

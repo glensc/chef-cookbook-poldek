@@ -25,7 +25,11 @@
 
 # Cache directory for downloaded files. NOTE that parent directory of cachedir
 # must exist.
+<% if node['poldek']['cachedir'] %>
+cachedir = node['poldek']['cachedir']
+<% else %>
 #cachedir = $HOME/.poldek-cache
+<% end %>
 
 # Switch to ordinary user at startup when executed by root
 #runas = poldek
@@ -53,7 +57,7 @@
 # Do not save given paths into created indexes. This option may significantly
 # reduce index size. Example (notice missing starting '/'):
 # exclude path = usr/share/doc:usr/share/man:usr/src
-#exclude path = 
+#exclude path =
 
 # Full path name to a PM (rpm for now) binary.
 pm command = /usr/lib/poldek/pm-command.sh
@@ -90,13 +94,13 @@ pm command = /usr/lib/poldek/pm-command.sh
 # proxy = PROTOCOL[,PROTOCOL...]:PROXY_URL
 # Example:
 # proxy = http: http://w3cache.foo.org:8080
-#proxy = 
+#proxy =
 
 # Comma separated list of hosts or domains which will not be accessed via proxy.
 # Option overrides no_proxy environment variable.
 # Example:
 # noproxy = localhost, .pl, ftp.foo.bar.org
-#noproxy = 
+#noproxy =
 
 # Internal HTTP and FTP client is stubborn, it retries to retrive
 # file if connection breaks. This option tells it how many times
@@ -154,7 +158,7 @@ ignore = vserver-packages
 # rpmdef  = _excludedocs 1
 # If non-zero, all erasures will be automagically repackaged.
 # rpmdef  = _repackage_all_erasures 1
-#rpmdef = 
+#rpmdef =
 
 
 ### Dependency processing settings

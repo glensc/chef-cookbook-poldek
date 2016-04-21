@@ -18,3 +18,6 @@
 #
 
 default['poldek']['cachedir'] = '/var/cache/poldek'
+
+# enable, if you wish poldek recipe to manage poldek config
+default['poldek']['manage'] = false

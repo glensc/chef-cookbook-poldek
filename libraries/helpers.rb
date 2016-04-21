@@ -27,6 +27,15 @@ module Poldek
       !which('poldek').nil?
     end
 
+    # Return keys from hash whose values are not falsy
+    #
+    # @return []
+    def filter_enabled(hash)
+      hash.reject do |k,v|
+        !v
+      end
+    end
+
     # Finds a command in $PATH
     #
     # @return [String, nil]

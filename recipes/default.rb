@@ -30,6 +30,11 @@ if node['poldek']['manage']
     group 'root'
     mode '0644'
     source 'poldek.conf.erb'
+
+    variables({
+      :hold => filter_enabled(node['poldek']['hold']).keys.join(' '),
+      :ignore => filter_enabled(node['poldek']['ignore']).keys.join(' '),
+    })
   end
 else
   # do not modify it, only update ensure permissions

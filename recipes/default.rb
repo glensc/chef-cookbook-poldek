@@ -19,12 +19,23 @@
 
 directory node['poldek']['cachedir'] do
   recursive true
-end
-
-template '/etc/poldek/poldek.conf' do
   owner 'root'
   group 'root'
-  mode '0644'
-  source 'poldek.conf.erb'
-  only_if { node['poldek']['manage'] }
+  mode '0755'
+end
+
+if node['poldek']['manage']
+  template '/etc/poldek/poldek.conf' do
+    owner 'root'
+    group 'root'
+    mode '0644'
+    source 'poldek.conf.erb'
+  end
+else
+  # do not modify it, only update ensure permissions
+  file '/etc/poldek/poldek.conf' do
+    owner 'root'
+    group 'root'
+    mode '0644'
+  end
 end

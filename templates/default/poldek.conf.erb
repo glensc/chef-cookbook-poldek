@@ -1,0 +1,192 @@
+# poldek main configuration file.
+
+# Some macros. Macros are local, they are not visible in included files
+# and macros declared in them are not visible to includer.
+# Macros names starts with underscore '_'.
+
+# Both local and remote files may be included. Included files may not contain
+# [global] section, it will be ignored anyway.
+
+# local sources
+%include source.conf
+
+# /etc/poldek/repos.d/*.conf
+%includedir repos.d
+
+# External downloaders configuration, not necessary in most cases, cause
+# to internal HTTP and FTP client.
+#%include fetch.conf
+
+[global]
+
+
+# This parameter allows to configure the default repository index type.
+#default index type = pndir
+
+# Cache directory for downloaded files. NOTE that parent directory of cachedir
+# must exist.
+#cachedir = $HOME/.poldek-cache
+
+# Switch to ordinary user at startup when executed by root
+#runas = poldek
+
+# Permits using root privileges for installation only. If set to "auto" then
+# automatically turned on when poldek executed as ordinary user.
+#use sudo = auto
+
+# Load /etc/apt/sources.list.
+#load apt sources list = no
+
+# Handle gzipped indexes externally (needed on RedHat 9 and Fedora Core 1 and 2).
+# This option is a workaround for broken zlib linked into librpm; with enabled
+# 'auto zlib in rpm' poldek tries to detect such case and then enables external
+# *.gz handling automatically.
+#vfile external compress = no
+
+# Auto detection of zlib linked into librpm. See 'vfile external compress'
+# description.
+#auto zlib in rpm = yes
+
+# Automatically download whole index if incremental update fails.
+#autoupa = yes
+
+# Do not save given paths into created indexes. This option may significantly
+# reduce index size. Example (notice missing starting '/'):
+# exclude path = usr/share/doc:usr/share/man:usr/src
+#exclude path = 
+
+# Full path name to a PM (rpm for now) binary.
+pm command = /usr/lib/poldek/pm-command.sh
+
+# Full path name to sudo binary.
+#sudo command = /usr/bin/sudo
+
+
+### File downloaders configuration
+
+# Send ${USER}@${HOSTNAME} as anonymous FTP password (by default
+# 'poldek@znienacka.net' is sent)
+#vfile ftp sysuser as anon passwd = no
+
+# File getters configuration parameter. By this option URL handlers may be configured.
+# To get file from HTTP and FTP servers poldek uses its internal client (what is
+# recommended), although it can be changedby this option. Others protocols handled
+# by external utilities can be configured also. The syntax is:
+# default fetcher = PROTOCOL[,PROTOCOL...]:FETCHER_NAME
+
+# where FETCHER_NAME is a name of one of the fetcher preconfigured in [fetch]
+# sections (placed in fetch.conf in default configuration).
+# Examples:
+# default fetcher = ftp,http:internal
+# default fetcher = https:wget
+# default fetcher = http,ftp:aria
+# default fetcher = cdrom:vfjuggle
+# vfjuggle is a cdrom getter supplied with poldek.
+#default fetcher = http,ftp: internal
+
+# Proxies for internal FTP and HTTP client may be configured in usual
+# way, by environment variables ftp_proxy and http_proxy, or by this option.
+# Its syntax is similar to "default fetcher" one:
+# proxy = PROTOCOL[,PROTOCOL...]:PROXY_URL
+# Example:
+# proxy = http: http://w3cache.foo.org:8080
+#proxy = 
+
+# Comma separated list of hosts or domains which will not be accessed via proxy.
+# Option overrides no_proxy environment variable.
+# Example:
+# noproxy = localhost, .pl, ftp.foo.bar.org
+#noproxy = 
+
+# Internal HTTP and FTP client is stubborn, it retries to retrive
+# file if connection breaks. This option tells it how many times
+# it should try.
+#vfile retries = 128
+
+
+### Installation options
+
+# Install packages in small groups instead of doing all-or-nothing
+# installations.
+#particle install = yes
+
+# Do not remove downloaded packages after its successful installation.
+#keep downloads = no
+
+# Controls visibility of multiple package instances with different EVR.
+# If on, only one, highest version will be visible.
+#unique package names = no
+
+# Epoch autopromotion during dependency comparision. RPM specific.
+# Set it up if you are using system with rpm prior to 4.2.1 version.
+#promoteepoch = no
+
+# Confirm packages installation.
+#confirm installation = no
+
+# Confirm packages removal.
+#confirm removal = yes
+
+# Let the user select package among equivalents.
+#choose equivalents manually = yes
+
+# Prevent package listed from being upgraded if they are already installed.
+# hold = kernel* foo*.i686 th-test:* *-smp-* th-ready:bar*.x86_64
+hold = kernel*
+
+# Ignore package list - packages fits given mask will be invisible.
+# ignore = *-smp-* foo*
+ignore = vserver-packages
+
+# Conflicts with already installed packages are treated as resolved
+# if at least one of multiple-installed package satisfies conflict.
+# rpm doesn't support such cases, so --pm-nodeps is needed (use with
+# care).
+#allow duplicates = yes
+
+
+### RPM specific options
+
+# rpm macros can be set by this option. Examples:
+# rpmdef   = _install_langs pl:pl_PL:lt:lt_LT
+# Do not install any documentation:
+# rpmdef  = _netsharedpath /usr/share/info:/usr/share/man
+# rpmdef  = _excludedocs 1
+# If non-zero, all erasures will be automagically repackaged.
+# rpmdef  = _repackage_all_erasures 1
+#rpmdef = 
+
+
+### Dependency processing settings
+# Subtle dependency processing options, they should not be changed
+# unless you know what you are doing
+
+# RPM 4.4.6 introduces auto dependencies based on package directories.
+# Option controls this feature.
+#auto directory dependencies = auto
+
+# Automatically install packages required by installed ones.
+#follow = yes
+
+# Greedy upgrades, i.e. upgrade packages which dependencies are broken
+# by being uninstalled ones.
+#greedy = yes
+
+# Be yet more greedy; if successor of orphaned package found, and this
+# successor drags no packages then upgrade the package instead of process
+# its dependencies. Option value is implied by 'greedy' one by defalut.
+#aggressive greedy = yes
+
+# Be tolerant for unmatched versioned dependencies which rpm tolerates, e.g.
+# package A requires capability foo &gt;= 1.0 while package B provides "foo"
+# without any version. Use with care, it may cause weird dependency errors.
+#mercy = no
+
+# Taking into account package Suggests.
+#suggests = yes
+
+# Taking into account package Obsoletes.
+#obsoletes = yes
+
+# Taking into account package Conflicts.
+#conflicts = yes

@@ -20,6 +20,9 @@
 # Cache directory for downloaded files.
 default['poldek']['cachedir'] = '/var/cache/poldek'
 
+# Full path name to a PM binary.
+default['poldek']['pm command'] = '/usr/lib/poldek/pm-command.sh'
+
 # Prevent package listed from being upgraded if they are already installed.
 # hold = kernel* foo*.i686 th-test:* *-smp-* th-ready:bar*.x86_64
 # Only the key is used, value can be used for descriptive purposes

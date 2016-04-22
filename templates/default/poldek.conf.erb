@@ -60,7 +60,7 @@ cachedir = <%= node['poldek']['cachedir'] %>
 #exclude path =
 
 # Full path name to a PM (rpm for now) binary.
-pm command = /usr/lib/poldek/pm-command.sh
+pm command = <%= node['poldek']['pm command'] %>
 
 # Full path name to sudo binary.
 #sudo command = /usr/bin/sudo

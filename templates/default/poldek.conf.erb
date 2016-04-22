@@ -171,7 +171,7 @@ ignore = <%= @ignore %>
 
 # RPM 4.4.6 introduces auto dependencies based on package directories.
 # Option controls this feature.
-#auto directory dependencies = auto
+auto directory dependencies = <%= node['poldek']['auto directory dependencies'] %>
 
 # Automatically install packages required by installed ones.
 #follow = yes

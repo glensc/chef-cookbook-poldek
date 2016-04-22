@@ -23,6 +23,14 @@ default['poldek']['cachedir'] = '/var/cache/poldek'
 # Full path name to a PM binary.
 default['poldek']['pm command'] = '/usr/lib/poldek/pm-command.sh'
 
+# RPM 4.4.6 introduces auto dependencies based on package directories.
+default['poldek']['auto directory dependencies'] = 'auto'
+
+# disable this for ac
+if node['platform_family'] == 'pld' && node['platform_version'].to_i < 3
+  default['poldek']['auto directory dependencies'] = 'no'
+end
+
 # Prevent package listed from being upgraded if they are already installed.
 # hold = kernel* foo*.i686 th-test:* *-smp-* th-ready:bar*.x86_64
 # Only the key is used, value can be used for descriptive purposes

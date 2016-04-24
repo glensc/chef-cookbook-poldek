@@ -33,7 +33,9 @@ if node['poldek']['manage']
 
     variables({
       :hold => filter_enabled(node['poldek']['hold']).keys.join(' '),
+      :hold_comments => item_comments(node['poldek']['hold']),
       :ignore => filter_enabled(node['poldek']['ignore']).keys.join(' '),
+      :ignore_comments => item_comments(node['poldek']['ignore'])
     })
   end
 else

@@ -31,8 +31,19 @@ module Poldek
     #
     # @return []
     def filter_enabled(hash)
-      hash.dup.reject do |k,v|
-        !v
+      hash.dup.select do |k,v|
+        v
+      end
+    end
+
+    # Build list of comments for each package
+    #
+    # @return []
+    def item_comments(items)
+      filter_enabled(items).select do |k, v|
+        v.kind_of?(String)
+      end.collect do |k, v|
+        "# #{k}: #{v}"
       end
     end
 

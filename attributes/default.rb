@@ -26,9 +26,13 @@ default['poldek']['pm command'] = '/usr/lib/poldek/pm-command.sh'
 # RPM 4.4.6 introduces auto dependencies based on package directories.
 default['poldek']['auto directory dependencies'] = 'auto'
 
-# disable this for ac
+# AC specific overrides
 if node['platform_family'] == 'pld' && node['platform_version'].to_i < 3
+  # disable this for ac
   default['poldek']['auto directory dependencies'] = 'no'
+  # pm command not ported to ac
+  # https://bugs.launchpad.net/poldek/+bug/1575176
+  default['poldek']['pm command'] = nil
 end
 
 # Prevent package listed from being upgraded if they are already installed.

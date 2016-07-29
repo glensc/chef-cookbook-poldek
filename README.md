@@ -20,6 +20,41 @@ This cookbook manages [poldek](http://poldek.pld-linux.org/) config and reposito
 
 ## Resources/Providers
 
+### `poldek_repository`
+
+This LWRP provides an easy way to manage additional Poldek repositories.
+
+#### Actions
+
+- `:add` creates a repository file and builds the repository listing (default)
+- `:remove` removes the repository file
+
+#### Attribute Parameters
+
+- `repo_name`: name attribute. Unique name name of the repository and config file
+- `path`: Unique name of the repository. May be either path or URL.
+- `ignore`: package patterns to ignore
+- `auto`: Controling if repository index will be implicit loaded
+- `autoup`: Controls if repository index will be implicit updated.
+
+#### Examples
+
+Add the glen's carme repo:
+
+```ruby
+poldek_repository 'carme' do
+  path 'http://carme.pld-linux.org/~glen/th/x86_64/'
+end
+```
+
+Remove carme repo:
+
+```ruby
+poldek_repository 'carme' do
+  action :remove
+end
+```
+
 ## Contributing
 
 1. Fork the repository on Github

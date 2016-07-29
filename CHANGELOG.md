@@ -1,5 +1,9 @@
 # poldek Cookbook CHANGELOG
 
+## v0.2.0
+
+- add `poldek_repository` resource
+
 ## v0.1.1
 
 - configure `auto directory dependencies`, `pm command`

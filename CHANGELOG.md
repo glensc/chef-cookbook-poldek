@@ -3,6 +3,7 @@
 ## v0.2.0
 
 - add `poldek_repository` resource
+- expand variables in template, so the attributes are looked up at converge stage
 
 ## v0.1.1
 

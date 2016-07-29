@@ -141,20 +141,28 @@ pm command = <%= node['poldek']['pm command'] %>
 
 # Prevent package listed from being upgraded if they are already installed.
 # hold = kernel* foo*.i686 th-test:* *-smp-* th-ready:bar*.x86_64
-<% if !@hold_comments.empty? -%>
-<%= @hold_comments.join("\n") %>
+<%
+hold = filter_enabled(node['poldek']['hold']).keys.join(' ')
+hold_comments = item_comments(node['poldek']['hold'])
+%>
+<% if !hold_comments.empty? -%>
+<%= hold_comments.join("\n") %>
 <% end %>
-<% if @hold -%>
-hold = <%= @hold %>
+<% if hold -%>
+hold = <%= hold %>
 <% end %>
 
 # Ignore package list - packages fits given mask will be invisible.
 # ignore = *-smp-* foo*
-<% if !@ignore_comments.empty? -%>
-<%= @ignore_comments.join("\n") %>
+<%
+ignore = filter_enabled(node['poldek']['ignore']).keys.join(' ')
+ignore_comments = item_comments(node['poldek']['ignore'])
+%>
+<% if !ignore_comments.empty? -%>
+<%= ignore_comments.join("\n") %>
 <% end %>
-<% if @ignore -%>
-ignore = <%= @ignore %>
+<% if ignore -%>
+ignore = <%= ignore %>
 <% end %>
 
 # Conflicts with already installed packages are treated as resolved

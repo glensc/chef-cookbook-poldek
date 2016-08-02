@@ -63,7 +63,3 @@ module Poldek
     end
   end
 end
-
-Chef::Recipe.send(:include, ::Poldek::Helpers)
-Chef::Resource.send(:include, ::Poldek::Helpers)
-Chef::Provider.send(:include, ::Poldek::Helpers)

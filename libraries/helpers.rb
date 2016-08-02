@@ -29,11 +29,13 @@ module Poldek
 
     # Return keys from hash whose values are not falsy
     #
-    # @return []
+    # @return [] sorted hash
     def filter_enabled(hash)
-      hash.dup.select do |k,v|
-        v
-      end
+      Hash[
+        hash.dup.select do |k,v|
+          v
+        end.sort
+      ]
     end
 
     # Build list of comments for each package
